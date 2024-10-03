@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_rds_cluster" "autoatendimentodb" {
   cluster_identifier  = "autoatendimentodb-cluster"
   engine              = "aurora-postgresql"
-  engine_version      = "15.2"  # Altere conforme necessário
+  engine_version      = "14.8"  # Altere conforme necessário
   master_username     = var.db_username
   master_password     = var.db_password
   database_name       = var.db_name 
