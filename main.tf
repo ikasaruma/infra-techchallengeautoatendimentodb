@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_rds_cluster" "autoatendimentodb" {
   cluster_identifier  = "autoatendimentodb-cluster"
   engine              = "aurora-postgresql"
-  engine_version      = "15.4"  # Altere conforme necessário
+  engine_version      = "16.1"  # Altere conforme necessário
   master_username     = var.db_username
   master_password     = var.db_password
   database_name       = var.db_name 
@@ -15,7 +15,7 @@ resource "aws_rds_cluster" "autoatendimentodb" {
 resource "aws_rds_cluster_instance" "autoatendimentodb" {
   count              = 1
   cluster_identifier = aws_rds_cluster.autoatendimentodb.id
-  instance_class     = "db.t3.small"  # Classe de instância mínima
+  instance_class     = "db.serverless"  # Classe de instância mínima
   engine             = aws_rds_cluster.autoatendimentodb.engine
 }
 
