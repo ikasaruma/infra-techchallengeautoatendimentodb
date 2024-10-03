@@ -17,6 +17,7 @@ resource "aws_rds_cluster_instance" "autoatendimentodb" {
   cluster_identifier = aws_rds_cluster.autoatendimentodb.id
   instance_class     = "db.serverless"  # Classe de instância mínima
   engine             = aws_rds_cluster.autoatendimentodb.engine
+  iam_role           = var.lab_role
 }
 
 output "db_endpoint" {
