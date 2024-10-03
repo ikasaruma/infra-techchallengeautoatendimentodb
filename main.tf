@@ -2,6 +2,10 @@ provider "aws" {
   region = "us-east-1"  # Altere para a região desejada
 }
 
+data "aws_iam_role" "existing_role" {
+  role_name = "LabRole"  # Substitua pelo nome da sua role existente
+}
+
 resource "aws_rds_cluster" "autoatendimentodb" {
   cluster_identifier  = "autoatendimentodb-cluster"
   engine              = "aurora-postgresql"
@@ -17,7 +21,12 @@ resource "aws_rds_cluster_instance" "autoatendimentodb" {
   cluster_identifier = aws_rds_cluster.autoatendimentodb.id
   instance_class     = "db.serverless"  # Classe de instância mínima
   engine             = aws_rds_cluster.autoatendimentodb.engine
-  iam_role           = var.lab_role
+  
+  # Associar a Role IAM existente
+  iam_role                              = data.aws_iam_role.existing_role.arn
+  
+  # Habilitar autenticação IAM (opcional)
+  iam_database_authentication_enabled   = true  
 }
 
 output "db_endpoint" {
