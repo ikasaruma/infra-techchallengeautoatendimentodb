@@ -13,3 +13,8 @@ variable "db_name" {
   description = "Name of the database to create"
   type        = string
 }
+
+variable "lab_role" {
+  description = "Lab role"
+  type        = string
+}
